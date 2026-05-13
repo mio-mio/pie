@@ -71,6 +71,24 @@ The global variable region could not be clearly distinguished when observing all
 Interestingly, the distribution of global variables under PIE appears visually very similar to the distributions of main and vuln under PIE (see Section 4.1), suggesting that the global variables also move together with the executable base address.
 
 ## 4.3 Heap
+<p float="left">
+  <img src="NoPieHeap.png" width="49%" />
+  <img src="PieHeap.png" width="49%" />
+</p>
+
+Heap distributions without PIE (left) and with PIE (right).
+
+At first glance, both graphs appear similarly randomized. However, the address ranges are significantly different.
+
+Without PIE, the heap addresses appear around the (10^9) range. In contrast, with PIE enabled, the heap addresses shift to a much higher range around (10^{14}).
+
+This suggests that enabling PIE affects not only the executable-related regions, but also the placement of the heap region in memory.
+
 ## 4.4 Stack
+<p float="left">
+  <img src="NoPieStack.png" width="49%" />
+  <img src="PieStack.png" width="49%" />
+</p>
+
 ## 4.5 Libc
 ## 4.6 Cross-Region Comparison 
