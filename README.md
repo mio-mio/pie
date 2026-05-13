@@ -52,4 +52,14 @@ To better understanding how each region behavior, I examined individually in the
   <img src="PieVuln.png" width="29%" />
 </p>
 
+These three graphs show the behavior of main and vuln without PIE (left), main with PIE (center), and vuln with PIE (right).
 
+Without PIE, both addresses remain fixed across executions. In contrast, enabling PIE causes both addresses to change on every run.
+
+Interestingly, the distributions of main and vuln under PIE appear visually very similar, suggesting that both functions move together with the executable base address.
+
+## 4.2 Global Variables
+<p float="left">
+  <img src="NoPieGlobal.png" width="49%" />
+  <img src="PieGlobal.png" width="49%" />
+</p>
