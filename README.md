@@ -43,7 +43,7 @@ Another important point is the y-axis scale. In the non-PIE experiment, the addr
 
 This suggests that enabling PIE significantly changes the placement behavior of the executable-related regions in memory.
 
-To better understanding how each region behavior, I examined individually in the following sections.
+To better understand how each region behaves, I examined them individually in the following sections.
 
 ## 4.1 Main & Vuln
 <p float="left">
@@ -112,7 +112,7 @@ In this experiment, enabling PIE did not appear to significantly change the obse
 
 ## 4.6 Cross-Region Comparison 
 
-I would like to focus on examining how the addresses are changed between Without and with PIE environment. Below are Main (top left), Vuln (top middle), Global (top right), Heap (bottom left), Stack (bottom middle) and libc (bottom right).
+Next, I compared how address behavior changes between the non-PIE and PIE configurations. Below are Main (top left), Vuln (top middle), Global (top right), Heap (bottom left), Stack (bottom middle) and libc (bottom right).
 
 <p float="left">
   <img src="CompareMain.png" width="29%" />
@@ -130,7 +130,7 @@ Interestingly, the executable-related regions (main, vuln, and global) show very
 
 Heap initially appears visually similar to the executable-related regions in the overview graph because the address range is too wide to clearly show its randomization behavior.
 
-## 4.7 Supplementary Observation
+## 4.7 Supplementary Observations
 
 Interestingly, despite the visibly different distributions, the entropy values became nearly identical in this experiment.
 
@@ -169,8 +169,8 @@ In this experiment, I observed that PIE introduces additional executable randomi
   
 ## 6. Conclusion
 
-Through exploring how enabling PIE changes memory address behavior, I was able to better understand how PIE extends ASLR to cover the executable itself, while the resulting randomness still remains structured and constrained.
+Through exploring how enabling PIE changes memory address behavior, I was able to better understand how PIE extends ASLR to cover the executable itself, while the resulting randomness structured and constrained.
 
-This structured behavior may still provide clues that could potentially be useful in exploitation scenarios.
+This structured behavior may still reduce unpredictability from an attacker's perspective
 
 Next, I would like to explore another fundamental defense mechanism: stack canaries, and how they help protect programs from memory corruption attacks.
