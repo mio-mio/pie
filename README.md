@@ -23,9 +23,33 @@ To observe the effect of PIE, I compiled the vulnerable C program with and witho
 
 I repeatedly executed the program and recorded the addresses to compare how it changes across runs.
 
-In this experiment, I also observed the address of vuln() to see whether individual functions are randomized independently or move together with the executable base address.
+In this experiment, I inculded vuln() in the C program and also observed the address of vuln() to see whether individual functions are randomized independently or move together with the executable base address.
 
 
-## 4. Observations: What Changes
+## 4. Observations: What Changes between No-PIE and PIE
 
-## 4.1 
+<p float="left">
+  <img src="NoPieAll.png" width="49%" />
+  <img src="PieAll.png" width="49%" />
+</p>
+
+This time, I observed six regions: main, vuln, global, heap, stack, and libc under both configurations: without PIE (left) and with PIE (right).
+
+Some regions are difficult to distinguish in the overview graphs because certain addresses overlap visually, while others appear compressed due to the large differences in address ranges.
+
+However, the distributions of libc (orange), heap (green), and the executable-related regions appear noticeably different at first glance.
+
+Another important point is the y-axis scale. In the non-PIE experiment, the addresses ranged roughly from (10^7) to (10^{14}). In contrast, under PIE, most observed regions appeared within a much narrower and higher address range around (10^{14}).
+
+This suggests that enabling PIE significantly changes the placement behavior of the executable-related regions in memory.
+
+To better understanding how each region behavior, I examined individually in the following sections.
+
+## 4.1 Main & Vuln
+<p float="left">
+  <img src="NoPieMainVuln.png" width="29%" />
+  <img src="PieMain.png" width="29%" />
+  <img src="PieVuln.png" width="29%" />
+</p>
+
+
