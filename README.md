@@ -130,6 +130,8 @@ Interestingly, the executable-related regions (main, vuln, and global) show very
 
 Heap initially appears visually similar to the executable-related regions in the overview graph because the address range is too wide to clearly show its randomization behavior.
 
+## 4.7 Supplementary Observation
+
 Interestingly, despite the visibly different distributions, the entropy values became nearly identical in this experiment.
 
 This occurred because most observed addresses were unique across executions, causing the entropy calculation to mainly reflect uniqueness rather than distribution shape.
@@ -145,4 +147,30 @@ When examining both binaries using `readelf -h`, the executable type changed fro
 
 This suggests that the executable itself becomes relocatable, similarly to shared libraries.
 
-## 5.
+
+Another interesting observation appeared when examining the addresses under PIE more closely.
+
+For main, vuln, global, heap, and libc, the last three hexadecimal digits remained constant across executions, while the stack consistently preserved its final hexadecimal digit.
+
+![WithPIEAddresses](Screenshot2026-05-13152728.png)
+
+This behavior suggests that memory alignment still constrains portions of the address space, even when ASLR and PIE are enabled.
+
+
+## 5. Key Insight
+
+In this experiment, I observed that PIE introduces additional executable randomization beyond ASLR. However, the resulting memory layout is still constrained rather than completely random.
+
+- The executable-related regions (main, vuln, and global) showed very similar movement patterns under PIE.
+- Stack and libc appeared largely unaffected by enabling PIE, as they were already highly randomized under ASLR.
+- Heap addresses were randomized in both configurations, although their placement shifted to a higher address range under PIE.
+- The executable type changed from `EXEC` to `DYN`, suggesting that the executable itself became relocatable.
+- Memory alignment still constrained portions of the address space, even with ASLR and PIE enabled.
+  
+## 6. Conclusion
+
+Through exploring how enabling PIE changes memory address behavior, I was able to better understand how PIE extends ASLR to cover the executable itself, while the resulting randomness still remains structured and constrained.
+
+This structured behavior may still provide clues that could potentially be useful in exploitation scenarios.
+
+Next, I would like to explore another fundamental defense mechanism: stack canaries, and how they help protect programs from memory corruption attacks.
