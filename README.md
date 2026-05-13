@@ -63,3 +63,14 @@ Interestingly, the distributions of main and vuln under PIE appear visually very
   <img src="NoPieGlobal.png" width="49%" />
   <img src="PieGlobal.png" width="49%" />
 </p>
+
+Global variable distributions without PIE (left) and with PIE (right).
+
+The global variable region could not be clearly distinguished when observing all six regions together in the overview graph. However, individual analysis revealed that the global variables are also randomized under PIE.
+
+Interestingly, the distribution of global variables under PIE appears visually very similar to the distributions of main and vuln under PIE (see Section 4.1), suggesting that the global variables also move together with the executable base address.
+
+## 4.3 Heap
+## 4.4 Stack
+## 4.5 Libc
+## 4.6 Cross-Region Comparison 
