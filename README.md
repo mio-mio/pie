@@ -14,7 +14,7 @@ This experiment aims to observe how PIE affects address randomization, and to me
 
 PIE is typically used together with ASLR, as it allows the program itself to be loaded at different base addresses, enabling full randomization of the executable.
 
-Without PIE, the executable is loaded at a fixed base address, even when ASLR is enabled as far as I tested in [last experiment](https://github.com/mio-mio/aslr).
+Without PIE, the executable is loaded at a fixed base address, even when ASLR is enabled based on my [last experiment](https://github.com/mio-mio/aslr).
 
 
 ## 3. Experiment Setup
@@ -39,7 +39,7 @@ Some regions are difficult to distinguish in the overview graphs because certain
 
 However, the distributions of libc (orange), heap (green), and the executable-related regions appear noticeably different at first glance.
 
-Another important point is the y-axis scale. In the non-PIE experiment, the addresses ranged roughly from (10^7) to (10^{14}). In contrast, under PIE, most observed regions appeared within a much narrower and higher address range around (10^{14}).
+Another important point is the y-axis scale. In the non-PIE experiment, the addresses ranged roughly from 10^7 to 10^14. In contrast, under PIE, most observed regions appeared within a much narrower and higher address range around 10^14.
 
 This suggests that enabling PIE significantly changes the placement behavior of the executable-related regions in memory.
 
@@ -80,7 +80,7 @@ Heap distributions without PIE (left) and with PIE (right).
 
 At first glance, both graphs appear similarly randomized. However, the address ranges are significantly different.
 
-Without PIE, the heap addresses appear around the (10^9) range. In contrast, with PIE enabled, the heap addresses shift to a much higher range around (10^{14}).
+Without PIE, the heap addresses appear around the 10^9 range. In contrast, with PIE enabled, the heap addresses shift to a much higher range around 10^14.
 
 This suggests that enabling PIE affects not only the executable-related regions, but also the placement of the heap region in memory.
 
