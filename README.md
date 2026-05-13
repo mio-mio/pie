@@ -90,5 +90,13 @@ This suggests that enabling PIE affects not only the executable-related regions,
   <img src="PieStack.png" width="49%" />
 </p>
 
+Stack distributions without PIE (left) and with PIE (right).
+
+Unlike the executable-related regions observed earlier, the stack appears randomized in both configurations, and the overall distribution pattern remains visually similar with and without PIE.
+
+This suggests that stack randomization is already largely handled by ASLR, and enabling PIE does not significantly change its observable behavior in this experiment.
+
 ## 4.5 Libc
+
+
 ## 4.6 Cross-Region Comparison 
