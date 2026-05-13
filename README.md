@@ -23,5 +23,9 @@ To observe the effect of PIE, I compiled the vulnerable C program with and witho
 
 I repeatedly executed the program and recorded the addresses to compare how it changes across runs.
 
+In this experiment, I also observed the address of vuln() to see whether individual functions are randomized independently or move together with the executable base address.
+
 
 ## 4. Observations: What Changes
+
+## 4.1 
