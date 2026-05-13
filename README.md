@@ -102,4 +102,47 @@ This suggests that stack randomization is already largely handled by ASLR, and e
   <img src="PieLibc.png" width="49%" />
 </p>
 
+Libc distributions without PIE (left) and with PIE (right).
+
+The libc appears highly randomized in both configurations, and the overall distribution pattern remains visually very similar.
+
+This behavior is expected because libc is already loaded as a shared library and is therefore independently relocatable under ASLR, even without PIE enabled for the executable itself.
+
+In this experiment, enabling PIE did not appear to significantly change the observable behavior of libc randomization.
+
 ## 4.6 Cross-Region Comparison 
+
+I would like to focus on examining how the addresses are changed between Without and with PIE environment. Below are Main (top left), Vuln (top middle), Global (top right), Heap (bottom left), Stack (bottom middle) and libc (bottom right).
+
+<p float="left">
+  <img src="CompareMain.png" width="29%" />
+  <img src="CompareVuln.png" width="29%" />
+  <img src="CompareGlobal.png" width="29%" />
+</p>
+
+<p float="left">
+  <img src="CompareHeap.png" width="29%" />
+  <img src="CompareStack.png" width="29%" />
+  <img src="CompareLibc.png" width="29%" />
+</p>
+
+Interestingly, the executable-related regions (main, vuln, and global) show very similar patterns, while stack and libc show highly randomized distributions in both configurations.
+
+Heap initially appears visually similar to the executable-related regions in the overview graph because the address range is too wide to clearly show its randomization behavior.
+
+Interestingly, despite the visibly different distributions, the entropy values became nearly identical in this experiment.
+
+This occurred because most observed addresses were unique across executions, causing the entropy calculation to mainly reflect uniqueness rather than distribution shape.
+
+![WithPIEEntropy](Screenshot2026-05-13134806.png)
+
+
+When examining both binaries using `readelf -h`, the executable type changed from `EXEC` to `DYN` after enabling PIE.
+
+![WithoutPIEReadelf](Screenshot2026-05-13134536.png)
+
+![WithPIEReadelf](Screenshot2026-05-13134546.png)
+
+This suggests that the executable itself becomes relocatable, similarly to shared libraries.
+
+## 5.
