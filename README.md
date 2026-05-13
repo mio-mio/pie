@@ -97,6 +97,9 @@ Unlike the executable-related regions observed earlier, the stack appears random
 This suggests that stack randomization is already largely handled by ASLR, and enabling PIE does not significantly change its observable behavior in this experiment.
 
 ## 4.5 Libc
-
+<p float="left">
+  <img src="NoPieLibc.png" width="49%" />
+  <img src="PieLibc.png" width="49%" />
+</p>
 
 ## 4.6 Cross-Region Comparison 
